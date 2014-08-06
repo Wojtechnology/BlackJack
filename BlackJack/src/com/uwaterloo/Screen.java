@@ -6,7 +6,7 @@
 
 package com.uwaterloo;
 
-import javax.swing.JFrame;
+import javax.swing.*;
 
 /**
  *
@@ -14,11 +14,13 @@ import javax.swing.JFrame;
  */
 public class Screen extends JFrame{
     
-    public Screen(int x, int y){
-        this.setSize(x, y);
-        this.setVisible(true);
-        this.setResizable(false);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    public Screen(int a, int b, String title){
+        setSize(a, b);
+        setTitle(title);
+        setVisible(true);
+        setResizable(false);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setContentPane(new ContentPanel("greenbackground.png"));
     }
     
 }

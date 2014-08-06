@@ -6,8 +6,6 @@
 
 package com.uwaterloo;
 
-import javax.swing.JFrame;
-
 /**
  *
  * @author wojtekswiderski
@@ -15,7 +13,7 @@ import javax.swing.JFrame;
 public class Main {
     
     public static void main(String [] args){
-        Screen window = new Screen(800, 600);
+        Screen window = new Screen(1024, 768, "Black Jack");
+        Cards deck = new Cards(1000);
     }
-    
 }
