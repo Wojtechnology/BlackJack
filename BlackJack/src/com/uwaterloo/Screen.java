@@ -20,7 +20,8 @@ public class Screen extends JFrame{
         setVisible(true);
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setContentPane(new ContentPanel("greenbackground.png"));
+        JPanel cp = new ContentPanel(a, b, "images/greenbackground.png");
+        setContentPane(cp);
     }
     
 }

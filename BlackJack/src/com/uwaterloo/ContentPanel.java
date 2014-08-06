@@ -7,7 +7,6 @@
 package com.uwaterloo;
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -18,21 +17,22 @@ import javax.swing.*;
  */
 public class ContentPanel extends JPanel{
     
-    private BufferedImage bgimage;
+    private Image readImage;
+    private Image bgImage;
     
-    public ContentPanel(String filepath){
-        System.out.printf("Reading from %s\n", filepath);
+    public ContentPanel(int a, int b, String filepath){
         try{
-            bgimage = ImageIO.read(new File("greenbackground.png"));
+            readImage = ImageIO.read(new File(filepath));
         }catch(Exception e){
             System.out.printf("File not found\n");
         }
-        
+        bgImage = readImage.getScaledInstance(a, b, Image.SCALE_SMOOTH);
+        setBounds(0, 0, a, b);
     }
     
     @Override
     protected void paintComponent(Graphics g){
         super.paintComponent(g);
-        g.drawImage(bgimage, 0, 0, null);
+        g.drawImage(bgImage, 0, 0, null);
     }
 }

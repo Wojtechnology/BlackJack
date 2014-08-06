@@ -12,21 +12,21 @@ package com.uwaterloo;
  */
 public class Cards {
     
-    public int[] cards = new int[52];
-    public int shuffles;
+    private int[] cards = new int[52];
+    private int shuffles;
+    private int index;
     
     public Cards(int n){
         shuffles = n;
         initialize();
-        write();
-        shuffle();
-        write();
+        shuffleAll();
     }
     
     /**
      * Fills the cards array with integers incrementing from 1 to 52
      */
     public void initialize(){
+        index = 0;
         for(int i = 0; i < cards.length; i++){
             cards[i] = i;
         }
@@ -35,7 +35,8 @@ public class Cards {
     /**
      * Randomly scrambles the integers in the cards array
      */
-    public void shuffle(){
+    public void shuffleAll(){
+        index = 0;
         for(int i = 0; i < shuffles; i++){
             int rand1 = (int)(52 * Math.random());
             int rand2 = (int)(52 * Math.random());
@@ -96,5 +97,14 @@ public class Cards {
             System.out.printf("Card %d: %s of %s\n", i + 1, card, suite);
         }
         System.out.printf("\n");
+    }
+    
+    /**
+     * @return the integer of the current card
+     */
+    public int getCurrent(){
+        int n = cards[index];
+        index++;
+        return n;
     }
 }

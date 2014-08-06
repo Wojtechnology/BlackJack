@@ -6,6 +6,8 @@
 
 package com.uwaterloo;
 
+import javax.swing.*;
+
 /**
  *
  * @author wojtekswiderski
@@ -13,7 +15,12 @@ package com.uwaterloo;
 public class Main {
     
     public static void main(String [] args){
-        Screen window = new Screen(1024, 768, "Black Jack");
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                JFrame window = new Screen(1024, 768, "Black Jack");
+            }
+        });
         Cards deck = new Cards(1000);
     }
 }
