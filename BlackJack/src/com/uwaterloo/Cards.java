@@ -19,14 +19,20 @@ public class Cards {
     public Cards(int n){
         shuffles = n;
         initialize();
+        write();
         shuffleAll();
+        write();
+        int a = getCurrent();
+        System.out.printf("Card 1: %s of %s\n", CardTools.getCard(a), CardTools.getSuite(a));
+        int b = getCurrent();
+        System.out.printf("Card 2: %s of %s\n", CardTools.getCard(b), CardTools.getSuite(b));
     }
     
     /**
      * Fills the cards array with integers incrementing from 1 to 52
      */
     public void initialize(){
-        index = 0;
+        resetCounter();
         for(int i = 0; i < cards.length; i++){
             cards[i] = i;
         }
@@ -36,7 +42,7 @@ public class Cards {
      * Randomly scrambles the integers in the cards array
      */
     public void shuffleAll(){
-        index = 0;
+        resetCounter();
         for(int i = 0; i < shuffles; i++){
             int rand1 = (int)(52 * Math.random());
             int rand2 = (int)(52 * Math.random());
@@ -56,45 +62,7 @@ public class Cards {
     public void write(){
         System.out.printf("Current State of Cards:\n\n");
         for(int i = 0; i < cards.length; i++){
-            int r = cards[i] % 13;
-            int d = cards[i] / 13;
-            String card;
-            String suite;
-            switch(r){
-                case 0:
-                    card = "Ace";
-                    break;
-                case 10:
-                    card = "Jack";
-                    break;
-                case 11:
-                    card = "Queen";
-                    break;
-                case 12:
-                    card = "King";
-                    break;
-                default:
-                    card = r + 1 + "";
-                    break;
-            }
-            switch(d){
-                case 0:
-                    suite = "Spades";
-                    break;
-                case 1:
-                    suite = "Hearts";
-                    break;
-                case 2:
-                    suite = "Clubs";
-                    break;
-                case 3:
-                    suite = "Diamonds";
-                    break;
-                default:
-                    suite = null;
-                    break;
-            }
-            System.out.printf("Card %d: %s of %s\n", i + 1, card, suite);
+            System.out.printf("Card %d: %s of %s\n", i + 1, CardTools.getCard(cards[i]), CardTools.getSuite(cards[i]));
         }
         System.out.printf("\n");
     }
@@ -103,8 +71,16 @@ public class Cards {
      * @return the integer of the current card
      */
     public int getCurrent(){
+        System.out.printf("Counter %d\n", index);
         int n = cards[index];
         index++;
         return n;
+    }
+    
+    /**
+     * Resets the index
+     */
+    public void resetCounter(){
+        index = 0;
     }
 }
