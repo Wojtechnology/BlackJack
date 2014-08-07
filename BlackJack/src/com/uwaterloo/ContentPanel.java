@@ -7,6 +7,7 @@
 package com.uwaterloo;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -17,7 +18,7 @@ import javax.swing.*;
  */
 public class ContentPanel extends JPanel{
     
-    private Image readImage;
+    private BufferedImage readImage;
     private Image bgImage;
     
     public ContentPanel(int a, int b, String filepath){

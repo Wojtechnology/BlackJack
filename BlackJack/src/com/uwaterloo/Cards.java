@@ -19,13 +19,7 @@ public class Cards {
     public Cards(int n){
         shuffles = n;
         initialize();
-        write();
         shuffleAll();
-        write();
-        int a = getCurrent();
-        System.out.printf("Card 1: %s of %s\n", CardTools.getCard(a), CardTools.getSuite(a));
-        int b = getCurrent();
-        System.out.printf("Card 2: %s of %s\n", CardTools.getCard(b), CardTools.getSuite(b));
     }
     
     /**

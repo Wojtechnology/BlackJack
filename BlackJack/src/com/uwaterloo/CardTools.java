@@ -10,15 +10,27 @@ package com.uwaterloo;
  * @author wojtekswiderski
  */
 public class CardTools {
-
+    
+    /**
+     * @param card
+     * @return the integer value for the value of the card
+     */
     public static int getCardNum(int card) {
         return card % 13;
     }
-
+    
+    /** 
+     * @param card
+     * @return the integer value for the suite of the card
+     */
     public static int getSuiteNum(int card) {
         return card / 13;
     }
 
+    /**
+     * @param card
+     * @return the string of the face value of the card
+     */
     public static String getCard(int card) {
         int n = getCardNum(card);
         switch (n) {
@@ -35,6 +47,10 @@ public class CardTools {
         }
     }
 
+    /**
+     * @param card
+     * @return the string of the suite of the card
+     */
     public static String getSuite(int card) {
         int n = getSuiteNum(card);
         switch (n) {

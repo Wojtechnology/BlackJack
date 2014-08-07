@@ -6,6 +6,7 @@
 
 package com.uwaterloo;
 
+import java.awt.*;
 import javax.swing.*;
 
 /**
@@ -21,7 +22,10 @@ public class Screen extends JFrame{
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         JPanel cp = new ContentPanel(a, b, "images/greenbackground.png");
+        cp.setLayout(new BorderLayout());
         setContentPane(cp);
+        JPanel pf = new PlayField(a, "images/cardsprite.png");
+        cp.add(pf, BorderLayout.SOUTH);
     }
     
 }
