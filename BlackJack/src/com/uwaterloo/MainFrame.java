@@ -13,19 +13,24 @@ import javax.swing.*;
  *
  * @author wojtekswiderski
  */
-public class Screen extends JFrame{
+public class MainFrame extends JFrame{
     
-    public Screen(int a, int b, String title){
+    public MainFrame(int a, int b, String title){
+        
+        // setting up JFrame
         setSize(a, b);
         setTitle(title);
         setVisible(true);
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        JPanel cp = new ContentPanel(a, b, "images/greenbackground.png");
-        cp.setLayout(new BorderLayout());
+        
+        // setting  up the content panel
+        JPanel cp = new ContentPanel(a, b);
+        cp.setLayout(new CardLayout());
         setContentPane(cp);
-        JPanel pf = new PlayField(a, "images/cardsprite.png");
-        cp.add(pf, BorderLayout.SOUTH);
+        
+        // giving the content panel its primary contents
+        cp.add(new MenuPanel(a, b, cp));
     }
     
 }

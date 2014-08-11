@@ -3,13 +3,23 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.uwaterloo;
+package com.uwaterloo.helper;
+
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import javax.imageio.ImageIO;
 
 /**
  *
  * @author wojtekswiderski
  */
 public class CardTools {
+    
+    private static final int CARDWIDTH = 225;
+    private static final int CARDHEIGHT = 315;
+    
+    private static BufferedImage spriteSheet;
     
     /**
      * @param card
@@ -63,5 +73,26 @@ public class CardTools {
             default:
                 return "Diamonds";
         }
+    }
+    
+    /**
+     * Reads the sprite sheet of cards from filepath and creates individual images
+     * for each card
+     * @param filepath 
+     */
+    public static Image[][] createSprites(String filepath){
+        try{
+            spriteSheet = ImageIO.read(new File(filepath));
+        }catch(Exception e){
+            System.out.printf("File not found\n");
+        }
+        Image[][] sprites = new Image[4][13];
+        for(int i = 0; i < 4; i++){
+            for(int j = 0; j < 13; j++){
+                BufferedImage tempImage = spriteSheet.getSubimage(CARDWIDTH * j, CARDHEIGHT * i, CARDWIDTH, CARDHEIGHT);
+                sprites[i][j] = tempImage.getScaledInstance(CARDWIDTH * 2 / 3, CARDHEIGHT * 2 / 3, Image.SCALE_SMOOTH);
+            }
+        }
+        return sprites;
     }
 }

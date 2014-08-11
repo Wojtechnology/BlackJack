@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package com.uwaterloo;
+package com.uwaterloo.helper;
 import java.util.Scanner;
 import java.io.FileWriter;
 import java.io.File;

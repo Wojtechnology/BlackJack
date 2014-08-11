@@ -21,14 +21,15 @@ public class ContentPanel extends JPanel{
     private BufferedImage readImage;
     private Image bgImage;
     
-    public ContentPanel(int a, int b, String filepath){
+    public ContentPanel(int a, int b){
+        
         try{
-            readImage = ImageIO.read(new File(filepath));
+            readImage = ImageIO.read(new File("images/greenbackground.png"));
         }catch(Exception e){
             System.out.printf("File not found\n");
         }
         bgImage = readImage.getScaledInstance(a, b, Image.SCALE_SMOOTH);
-        setBounds(0, 0, a, b);
+        setPreferredSize(new Dimension(a, b));
     }
     
     @Override
