@@ -23,13 +23,14 @@ public class DisplayTitle extends JPanel {
     
     public DisplayTitle() {
         try {
-            titleImage = ImageIO.read(new File("images/title.jpg"));
+            titleImage = ImageIO.read(new File("images/title.png"));
         } catch (Exception e) {
             System.out.printf("File not found\n");
         }
         
         setPreferredSize(new Dimension(titleImage.getWidth(null), titleImage.getHeight(null)));
         setVisible(true);
+        setOpaque(false);
     }
     
     @Override

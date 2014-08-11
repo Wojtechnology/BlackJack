@@ -30,7 +30,6 @@ public class MenuPanel extends JPanel {
         gc.insets = new Insets(10, 0, 0, 0);
         gc.anchor = GridBagConstraints.NORTH;
         gc.gridx = 0;
-        
         gc.gridy = 0;
         JPanel title = new DisplayTitle();
         add(title, gc);
