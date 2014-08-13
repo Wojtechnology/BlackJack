@@ -7,8 +7,12 @@ package com.uwaterloo;
 
 import com.uwaterloo.helper.CardTools;
 import com.uwaterloo.helper.Cards;
+import com.uwaterloo.helper.DisplayCards;
 import com.uwaterloo.helper.DisplayTitle;
+import com.uwaterloo.helper.InputDialogFrame;
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
 
@@ -21,11 +25,21 @@ public class OnePlayerPanel extends JPanel {
     private Cards cards;
 
     private Image[][] sprites = new Image[4][13];
+    
+    private List<Integer> dealerList;
+    private List<Integer> playerList;
 
     public OnePlayerPanel(int a, int b, JPanel parentPanel) {
 
         sprites = CardTools.createSprites("images/cardsprite.png");
         cards = new Cards(1000);
+        
+        dealerList = new ArrayList<Integer>();
+        dealerList.add(5);
+        dealerList.add(29);
+        playerList = new ArrayList<Integer>();
+        playerList.add(11);
+        playerList.add(36);
 
         Dimension size = new Dimension(a, b);
         setVisible(true);
@@ -81,16 +95,62 @@ public class OnePlayerPanel extends JPanel {
 
         gc.gridx = 0;
         gc.weightx = 2;
-        JPanel dealer = new JPanel();
+        JPanel dealer = new JPanel(){
+            @Override
+            protected void paintComponent(Graphics g){
+                super.paintComponent(g);
+                g.setColor(new Color(0, 0, 0, 50));
+                g.fillRoundRect(0, 0, getWidth(), getHeight(), 20, 20);
+            }
+        };
         dealer.setVisible(true);
         dealer.setOpaque(false);
+        dealer.setLayout(new GridBagLayout());
+        GridBagConstraints gcDealer = new GridBagConstraints();
+        gcDealer.anchor = GridBagConstraints.CENTER;
+        gcDealer.gridy = 0;
+        gcDealer.weighty = 1;
+        gcDealer.insets = new Insets(5, 0, 0, 0);
+        JLabel dealerLbl = new JLabel("Dealer's Hand");
+        dealerLbl.setForeground(Color.WHITE);
+        dealerLbl.setFont(new Font("sans-serif", Font.BOLD, 20));
+        dealer.add(dealerLbl, gcDealer);
         add(dealer, gc);
+        gcDealer.gridy = 1;
+        gcDealer.weighty = 1000;
+        dealer.add(new DisplayCards(dealerList, sprites), gcDealer);
 
         gc.gridx = 2;
         JPanel player = new JPanel();
         player.setVisible(true);
         player.setOpaque(false);
+        player.setLayout(new GridBagLayout());
+        GridBagConstraints gcPlayer = new GridBagConstraints();
+        gcPlayer.anchor = GridBagConstraints.CENTER;
+        JLabel playerLbl = new JLabel("Player's Hand");
+        playerLbl.setForeground(Color.WHITE);
+        playerLbl.setFont(new Font("sans-serif", Font.BOLD, 20));
+        gcPlayer.gridy = 0;
+        gcPlayer.gridx = 0;
+        gcPlayer.gridwidth = 2;
+        gcPlayer.weighty = 1;
+        gcPlayer.weightx = 1;
+        gcPlayer.insets = new Insets(5 ,0 ,0 ,0);
+        player.add(playerLbl, gcPlayer);
         add(player, gc);
+<<<<<<< HEAD
+        gcPlayer.gridwidth = 1;
+        gcPlayer.weighty = 1000;
+        gcPlayer.gridy = 1;
+        player.add(new DisplayCards(playerList, sprites), gcPlayer);
+=======
+        
+        
+        InputDialogFrame name = new InputDialogFrame();
+        name.run();
+        
+        
 
+>>>>>>> FETCH_HEAD
     }
 }
