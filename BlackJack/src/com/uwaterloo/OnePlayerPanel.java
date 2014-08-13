@@ -8,6 +8,7 @@ package com.uwaterloo;
 import com.uwaterloo.helper.CardTools;
 import com.uwaterloo.helper.Cards;
 import com.uwaterloo.helper.DisplayTitle;
+import com.uwaterloo.helper.InputDialogFrame;
 import java.awt.*;
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
@@ -91,6 +92,12 @@ public class OnePlayerPanel extends JPanel {
         player.setVisible(true);
         player.setOpaque(false);
         add(player, gc);
+        
+        
+        InputDialogFrame name = new InputDialogFrame();
+        name.run();
+        
+        
 
     }
 }
