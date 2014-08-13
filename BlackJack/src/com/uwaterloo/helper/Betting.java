@@ -12,6 +12,7 @@ import java.io.Writer;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.BufferedWriter;
+import com.uwaterloo.helper.InputDialogFrame;
  
 /**
  *
@@ -20,24 +21,17 @@ import java.io.BufferedWriter;
 public class Betting {
     private BufferedWriter writer;
     private final int STARTAMOUNT = 1000;
-    
-    
-    
-    
-    
-    
-public void Write(){
+
+
+public void Write(int n){
     String[] namesArray = new String[n];
         
         
-        
+     
         
         
         
     }
-    
-}
-    
     /**
      * Each new game starts the player with 1000 dollars and writes to a text file
      */
@@ -56,11 +50,7 @@ public void Write(){
      
         } catch(IOException e) {
         System.err.println("Error");
-        
-    
-        
-       
-            
+     
         }
         
     }
