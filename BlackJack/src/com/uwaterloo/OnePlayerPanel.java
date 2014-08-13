@@ -139,11 +139,14 @@ public class OnePlayerPanel extends JPanel {
         player.add(playerLbl, gcPlayer);
         add(player, gc);
 <<<<<<< HEAD
+<<<<<<< HEAD
         gcPlayer.gridwidth = 1;
         gcPlayer.weighty = 1000;
         gcPlayer.gridy = 1;
         player.add(new DisplayCards(playerList, sprites), gcPlayer);
 =======
+=======
+>>>>>>> FETCH_HEAD
         
         
         InputDialogFrame name = new InputDialogFrame();
