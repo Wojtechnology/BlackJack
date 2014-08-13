@@ -22,6 +22,7 @@ public class MainFrame extends JFrame{
         setTitle(title);
         setVisible(true);
         setResizable(false);
+        setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
         // setting  up the content panel

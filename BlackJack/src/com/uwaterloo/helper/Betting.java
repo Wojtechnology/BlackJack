@@ -27,7 +27,7 @@ public class Betting {
     
     
 public void Write(){
-    String[] namesArray = new String[n];
+    String[] namesArray = new String[10];
         
         
         
@@ -36,7 +36,7 @@ public void Write(){
         
     }
     
-}
+
     
     /**
      * Each new game starts the player with 1000 dollars and writes to a text file
