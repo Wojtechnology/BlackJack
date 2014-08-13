@@ -16,8 +16,8 @@ import javax.imageio.ImageIO;
  */
 public class CardTools {
     
-    private static final int CARDWIDTH = 225;
-    private static final int CARDHEIGHT = 315;
+    public static final int CARDWIDTH = 225;
+    public static final int CARDHEIGHT = 315;
     
     private static BufferedImage spriteSheet;
     

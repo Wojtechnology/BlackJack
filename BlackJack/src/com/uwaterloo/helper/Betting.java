@@ -21,10 +21,21 @@ import com.uwaterloo.helper.InputDialogFrame;
 public class Betting {
     private BufferedWriter writer;
     private final int STARTAMOUNT = 1000;
+<<<<<<< HEAD
 
 
 public void Write(int n){
     String[] namesArray = new String[n];
+=======
+    
+    
+    
+    
+    
+    
+public void Write(){
+    String[] namesArray = new String[10];
+>>>>>>> origin/master
         
         
      
@@ -32,6 +43,12 @@ public void Write(int n){
         
         
     }
+<<<<<<< HEAD
+=======
+    
+
+    
+>>>>>>> origin/master
     /**
      * Each new game starts the player with 1000 dollars and writes to a text file
      */
