@@ -19,11 +19,12 @@ import java.io.BufferedWriter;
  */
 public class Betting {
     private BufferedWriter writer;
+    private final int STARTAMOUNT = 1000;
+    
     /**
      * Each new game starts the player with 1000 dollars and writes to a text file
      */
     public void startingValue(){
-     int startAmount = 1000;
              
      
       

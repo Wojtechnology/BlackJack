@@ -67,8 +67,8 @@ public class OnePlayerPanel extends JPanel {
         
         JTextField betFld = new JTextField("Enter Bet Amount");
         betFld.setPreferredSize(bSize);
-        String amount = betFld.getText();
         controls.add(betFld, gcControls);
+        String betAmount = betFld.getText();
         
         
         gcControls.gridy = 1;
