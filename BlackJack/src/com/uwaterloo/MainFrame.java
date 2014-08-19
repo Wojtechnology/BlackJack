@@ -6,6 +6,7 @@
 
 package com.uwaterloo;
 
+import com.uwaterloo.helper.Betting;
 import java.awt.*;
 import javax.swing.*;
 
@@ -16,6 +17,8 @@ import javax.swing.*;
 public class MainFrame extends JFrame{
     
     public MainFrame(int a, int b, String title){
+        
+        Betting players = new Betting();
         
         // setting up JFrame
         setSize(a, b);
@@ -31,7 +34,7 @@ public class MainFrame extends JFrame{
         setContentPane(cp);
         
         // giving the content panel its primary contents
-        cp.add(new MenuPanel(a, b, cp));
+        cp.add(new MenuPanel(a, b, cp, players));
     }
     
 }

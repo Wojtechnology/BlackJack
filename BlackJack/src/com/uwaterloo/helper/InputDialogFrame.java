@@ -20,6 +20,6 @@ public class InputDialogFrame extends JFrame {
         setVisible(true);
         setSize(400, 300);
         setLocationRelativeTo(null);
-
+        
     }
 }

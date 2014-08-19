@@ -5,7 +5,9 @@
  */
 package com.uwaterloo;
 
+import com.uwaterloo.helper.Betting;
 import com.uwaterloo.helper.DisplayTitle;
+import com.uwaterloo.helper.InputDialogFrame;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,7 +19,7 @@ import javax.swing.*;
  */
 public class MenuPanel extends JPanel {
 
-    public MenuPanel(int a, int b, JPanel parentPanel) {
+    public MenuPanel(int a, int b, JPanel parentPanel, Betting players) {
         
         setVisible(true);
         setPreferredSize(new Dimension(a, b));
@@ -42,10 +44,11 @@ public class MenuPanel extends JPanel {
         vsAI.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
-                parentPanel.removeAll();
+                /*parentPanel.removeAll();
                 parentPanel.add(new OnePlayerPanel(a, b, parentPanel));
                 parentPanel.repaint();
-                parentPanel.revalidate();  
+                parentPanel.revalidate();*/
+                JFrame name = new InputDialogFrame();
             }
         });
         

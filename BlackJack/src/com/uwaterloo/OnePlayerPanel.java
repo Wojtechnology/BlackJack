@@ -143,8 +143,5 @@ public class OnePlayerPanel extends JPanel {
         gcPlayer.gridy = 1;
         player.add(new DisplayCards(playerList, sprites), gcPlayer);
         
-        
-        InputDialogFrame name = new InputDialogFrame();
-        
     }
 }
