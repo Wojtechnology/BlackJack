@@ -9,12 +9,12 @@ import com.uwaterloo.helper.CardTools;
 import com.uwaterloo.helper.Cards;
 import com.uwaterloo.helper.DisplayCards;
 import com.uwaterloo.helper.DisplayTitle;
-import com.uwaterloo.helper.InputDialogFrame;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.*;
-import javax.swing.border.BevelBorder;
 
 /**
  *
@@ -23,23 +23,24 @@ import javax.swing.border.BevelBorder;
 public class OnePlayerPanel extends JPanel {
 
     private Cards cards;
+    private JPanel ref;
+    private boolean dealt;
 
     private Image[][] sprites = new Image[4][13];
-    
+
     private List<Integer> dealerList;
     private List<Integer> playerList;
 
-    public OnePlayerPanel(int a, int b, JPanel parentPanel) {
+    public OnePlayerPanel(int a, int b, JPanel parentPanel, Cards inCards) {
+
+        ref = this;
+        dealt = false;
 
         sprites = CardTools.createSprites("images/cardsprite.png");
-        cards = new Cards(1000);
-        
+        cards = inCards;
+
         dealerList = new ArrayList<Integer>();
-        dealerList.add(5);
-        dealerList.add(29);
         playerList = new ArrayList<Integer>();
-        playerList.add(11);
-        playerList.add(36);
 
         Dimension size = new Dimension(a, b);
         setVisible(true);
@@ -69,7 +70,7 @@ public class OnePlayerPanel extends JPanel {
 
         // configuring panel for control of game
         Dimension bSize = new Dimension(150, 25);
-        
+
         controls.setLayout(new GridBagLayout());
         GridBagConstraints gcControls = new GridBagConstraints();
         gcControls.weighty = 1;
@@ -78,13 +79,12 @@ public class OnePlayerPanel extends JPanel {
         gcControls.gridy = 0;
         gcControls.insets = new Insets(5, 0, 0, 0);
         gcControls.anchor = GridBagConstraints.NORTH;
-        
+
         JTextField betFld = new JTextField("Enter Bet Amount");
         betFld.setPreferredSize(bSize);
         controls.add(betFld, gcControls);
         String betAmount = betFld.getText();
-        
-        
+
         gcControls.gridy = 1;
         gcControls.weighty = 1000;
         JButton betBtn = new JButton("Lock in Bet");
@@ -93,11 +93,12 @@ public class OnePlayerPanel extends JPanel {
 
         add(controls, gc);
 
+        // configuring dealer's box
         gc.gridx = 0;
         gc.weightx = 2;
-        JPanel dealer = new JPanel(){
+        JPanel dealer = new JPanel() {
             @Override
-            protected void paintComponent(Graphics g){
+            protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
                 g.setColor(new Color(0, 0, 0, 50));
                 g.fillRoundRect(0, 0, getWidth(), getHeight(), 20, 20);
@@ -116,10 +117,8 @@ public class OnePlayerPanel extends JPanel {
         dealerLbl.setFont(new Font("sans-serif", Font.BOLD, 20));
         dealer.add(dealerLbl, gcDealer);
         add(dealer, gc);
-        gcDealer.gridy = 1;
-        gcDealer.weighty = 1000;
-        dealer.add(new DisplayCards(dealerList, sprites), gcDealer);
 
+        // configuring player's box
         gc.gridx = 2;
         JPanel player = new JPanel();
         player.setVisible(true);
@@ -131,17 +130,31 @@ public class OnePlayerPanel extends JPanel {
         playerLbl.setForeground(Color.WHITE);
         playerLbl.setFont(new Font("sans-serif", Font.BOLD, 20));
         gcPlayer.gridy = 0;
-        gcPlayer.gridx = 0;
-        gcPlayer.gridwidth = 2;
         gcPlayer.weighty = 1;
-        gcPlayer.weightx = 1;
-        gcPlayer.insets = new Insets(5 ,0 ,0 ,0);
+        gcPlayer.insets = new Insets(5, 0, 0, 0);
         player.add(playerLbl, gcPlayer);
         add(player, gc);
-        gcPlayer.gridwidth = 1;
-        gcPlayer.weighty = 1000;
-        gcPlayer.gridy = 1;
-        player.add(new DisplayCards(playerList, sprites), gcPlayer);
-        
+
+        // events (not working as of now)
+        // put all variables as global
+        betBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (!dealt) {
+                    dealt = true;
+                    for (int i = 0; i < 2; i++) {
+                        dealerList.add(cards.getCurrent());
+                        playerList.add(cards.getCurrent());
+                    }
+                    gcDealer.gridy = 1;
+                    gcDealer.weighty = 1000;
+                    dealer.add(new DisplayCards(dealerList, sprites, true), gcDealer);
+                    gcPlayer.weighty = 1000;
+                    gcPlayer.gridy = 1;
+                    player.add(new DisplayCards(playerList, sprites, false), gcPlayer);
+                    
+                }
+            }
+        });
     }
 }

@@ -19,7 +19,7 @@ import javax.swing.*;
  */
 public class MenuPanel extends JPanel {
 
-    public MenuPanel(int a, int b, JPanel parentPanel, Betting players) {
+    public MenuPanel(int a, int b, JPanel parentPanel, JFrame mainFrame) {
         
         setVisible(true);
         setPreferredSize(new Dimension(a, b));
@@ -39,40 +39,40 @@ public class MenuPanel extends JPanel {
         Dimension bSize = new Dimension(150, 50);
         
         gc.gridy = 1;
-        JButton vsAI = new JButton();
+        JButton play = new JButton("Play");
         
-        vsAI.addActionListener(new ActionListener(){
+        play.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
-                /*parentPanel.removeAll();
-                parentPanel.add(new OnePlayerPanel(a, b, parentPanel));
-                parentPanel.repaint();
-                parentPanel.revalidate();*/
-                JFrame name = new InputDialogFrame();
+                JDialog name = new InputDialogFrame(a, b, parentPanel);
             }
         });
         
-        vsAI.setPreferredSize(bSize);
-        vsAI.setText("Play vs AI");
-        vsAI.setVisible(true);
-        add(vsAI, gc);
+        play.setPreferredSize(bSize);
+        play.setVisible(true);
+        add(play, gc);
 
         gc.gridy = 2;
-        JButton vOne = new JButton();
-        vOne.setPreferredSize(bSize);
-        vOne.setText("Play with 1 Friend");
-        vOne.setVisible(true);
-        vOne.setEnabled(false);
-        add(vOne, gc);
+        JButton settings = new JButton("Settings");
+        settings.setPreferredSize(bSize);
+        settings.setVisible(true);
+        settings.setEnabled(false);
+        add(settings, gc);
 
         gc.weighty = 1000;
         gc.gridy = 3;
-        JButton vTwo = new JButton();
-        vTwo.setPreferredSize(bSize);
-        vTwo.setText("Play with 2 Friends");
-        vTwo.setVisible(true);
-        vTwo.setEnabled(false);
-        add(vTwo, gc);
+        JButton exit = new JButton("Exit");
+        exit.setPreferredSize(bSize);
+        exit.setVisible(true);
+        
+        exit.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e){
+                mainFrame.dispose();
+            }
+        });
+        
+        add(exit, gc);
     }
 
 }

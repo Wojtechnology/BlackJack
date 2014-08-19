@@ -12,7 +12,7 @@ package com.uwaterloo.helper;
  */
 public class Cards {
     
-    private int[] cards = new int[52];
+    private int[] cards;
     private int shuffles;
     private int index;
     
@@ -26,6 +26,7 @@ public class Cards {
      * Fills the cards array with integers incrementing from 1 to 52
      */
     public void initialize(){
+        cards = new int[52];
         resetCounter();
         for(int i = 0; i < cards.length; i++){
             cards[i] = i;
@@ -76,5 +77,14 @@ public class Cards {
      */
     public void resetCounter(){
         index = 0;
+    }
+    
+    /**
+     * Checks if cards need to be shuffled and if so shuffles them
+     */
+    public void checkShuffle(){
+        if(index >= cards.length / 2){
+            shuffleAll();
+        }
     }
 }

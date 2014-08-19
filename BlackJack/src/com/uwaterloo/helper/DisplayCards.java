@@ -6,7 +6,12 @@
 package com.uwaterloo.helper;
 
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 /**
@@ -16,8 +21,10 @@ import javax.swing.JPanel;
 public class DisplayCards extends JPanel {
 
     private Image[] cardsArray;
+    private boolean dealer;
 
-    public DisplayCards(List<Integer> cardsList, Image[][] sprites) {
+    public DisplayCards(List<Integer> cardsList, Image[][] sprites, boolean inDealer) {
+        dealer = inDealer;
         Dimension size = new Dimension(sprites[0][0].getWidth(null) + (cardsList.size() - 1) * 25, sprites[0][0].getHeight(null));
         setOpaque(false);
         setPreferredSize(size);
@@ -31,8 +38,19 @@ public class DisplayCards extends JPanel {
     @Override
     protected void paintComponent(Graphics g){
         super.paintComponent(g);
-        for(int i = 0; i < cardsArray.length; i++){
-            g.drawImage(cardsArray[i], i * 25, 0, null);
+        if(dealer){
+            try {
+                g.drawImage(ImageIO.read(new File("images/cardback.png")).getScaledInstance(150, 210, Image.SCALE_SMOOTH), 0, 0, null);
+            } catch (Exception e) {
+                System.out.printf("File not found\n");
+            }
+            for(int i = 1; i < cardsArray.length; i++){
+                g.drawImage(cardsArray[i], i * 25, 0, null);
+            }
+        }else{
+            for(int i = 0; i < cardsArray.length; i++){
+                g.drawImage(cardsArray[i], i * 25, 0, null);
+            }
         }
     }
 }

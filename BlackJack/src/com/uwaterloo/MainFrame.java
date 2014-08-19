@@ -18,8 +18,6 @@ public class MainFrame extends JFrame{
     
     public MainFrame(int a, int b, String title){
         
-        Betting players = new Betting();
-        
         // setting up JFrame
         setSize(a, b);
         setTitle(title);
@@ -34,7 +32,7 @@ public class MainFrame extends JFrame{
         setContentPane(cp);
         
         // giving the content panel its primary contents
-        cp.add(new MenuPanel(a, b, cp, players));
+        cp.add(new MenuPanel(a, b, cp, this));
     }
     
 }
