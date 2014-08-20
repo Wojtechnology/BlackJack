@@ -66,7 +66,6 @@ public class Cards {
      * @return the integer of the current card
      */
     public int getCurrent(){
-        System.out.printf("Counter %d\n", index);
         int n = cards[index];
         index++;
         return n;

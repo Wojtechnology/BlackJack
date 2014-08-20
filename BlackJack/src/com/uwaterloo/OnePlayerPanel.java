@@ -49,6 +49,31 @@ public class OnePlayerPanel extends JPanel {
         setLayout(new GridBagLayout());
 
         GridBagConstraints gc = new GridBagConstraints();
+        GridBagConstraints gcControls = new GridBagConstraints();
+        GridBagConstraints gcDealer = new GridBagConstraints();
+        GridBagConstraints gcPlayer = new GridBagConstraints();
+
+        JTextField betFld = new JTextField("Enter Bet Amount");
+        JButton betBtn = new JButton("Lock in Bet");
+        JButton hitBtn = new JButton("Hit");
+        JButton stdBtn = new JButton("Stand");
+        JButton ddwBtn = new JButton("Double Down");
+        JButton splBtn = new JButton("Split");
+        JButton surBtn = new JButton("Surrender");
+        JButton insBtn = new JButton("Insurance");
+        JButton extBtn = new JButton("Exit");
+        JLabel betLbl = new JLabel(" ");
+        JPanel controls = new JPanel();
+        JPanel dealer = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.setColor(new Color(0, 0, 0, 50));
+                g.fillRoundRect(0, 0, getWidth(), getHeight(), 20, 20);
+            }
+        };
+        JPanel player = new JPanel();
+
         gc.anchor = GridBagConstraints.NORTH;
         gc.weightx = 1;
         gc.weighty = 1;
@@ -64,7 +89,6 @@ public class OnePlayerPanel extends JPanel {
         gc.gridwidth = 1;
         gc.weighty = 1000;
         gc.fill = GridBagConstraints.BOTH;
-        JPanel controls = new JPanel();
         controls.setVisible(true);
         controls.setOpaque(false);
 
@@ -72,7 +96,6 @@ public class OnePlayerPanel extends JPanel {
         Dimension bSize = new Dimension(150, 25);
 
         controls.setLayout(new GridBagLayout());
-        GridBagConstraints gcControls = new GridBagConstraints();
         gcControls.weighty = 1;
         gcControls.weightx = 1;
         gcControls.gridx = 0;
@@ -80,34 +103,61 @@ public class OnePlayerPanel extends JPanel {
         gcControls.insets = new Insets(5, 0, 0, 0);
         gcControls.anchor = GridBagConstraints.NORTH;
 
-        JTextField betFld = new JTextField("Enter Bet Amount");
         betFld.setPreferredSize(bSize);
         controls.add(betFld, gcControls);
-        String betAmount = betFld.getText();
 
         gcControls.gridy = 1;
-        gcControls.weighty = 1000;
-        JButton betBtn = new JButton("Lock in Bet");
         betBtn.setPreferredSize(bSize);
         controls.add(betBtn, gcControls);
+
+        gcControls.gridy = 2;
+        betLbl.setPreferredSize(bSize);
+        controls.add(betLbl, gcControls);
+
+        gcControls.gridy = 3;
+        hitBtn.setPreferredSize(bSize);
+        hitBtn.setEnabled(false);
+        controls.add(hitBtn, gcControls);
+
+        gcControls.gridy = 4;
+        stdBtn.setPreferredSize(bSize);
+        stdBtn.setEnabled(false);
+        controls.add(stdBtn, gcControls);
+
+        gcControls.gridy = 5;
+        ddwBtn.setPreferredSize(bSize);
+        ddwBtn.setEnabled(false);
+        controls.add(ddwBtn, gcControls);
+
+        gcControls.gridy = 6;
+        splBtn.setPreferredSize(bSize);
+        splBtn.setEnabled(false);
+        controls.add(splBtn, gcControls);
+
+        gcControls.gridy = 7;
+        surBtn.setPreferredSize(bSize);
+        surBtn.setEnabled(false);
+        controls.add(surBtn, gcControls);
+
+        gcControls.gridy = 8;
+        insBtn.setPreferredSize(bSize);
+        insBtn.setEnabled(false);
+        controls.add(insBtn, gcControls);
+
+        gcControls.gridy = 9;
+        gcControls.weighty = 1000;
+        extBtn.setPreferredSize(bSize);
+        extBtn.setEnabled(false);
+        controls.add(extBtn, gcControls);
 
         add(controls, gc);
 
         // configuring dealer's box
         gc.gridx = 0;
         gc.weightx = 2;
-        JPanel dealer = new JPanel() {
-            @Override
-            protected void paintComponent(Graphics g) {
-                super.paintComponent(g);
-                g.setColor(new Color(0, 0, 0, 50));
-                g.fillRoundRect(0, 0, getWidth(), getHeight(), 20, 20);
-            }
-        };
         dealer.setVisible(true);
         dealer.setOpaque(false);
         dealer.setLayout(new GridBagLayout());
-        GridBagConstraints gcDealer = new GridBagConstraints();
         gcDealer.anchor = GridBagConstraints.CENTER;
         gcDealer.gridy = 0;
         gcDealer.weighty = 1;
@@ -120,11 +170,9 @@ public class OnePlayerPanel extends JPanel {
 
         // configuring player's box
         gc.gridx = 2;
-        JPanel player = new JPanel();
         player.setVisible(true);
         player.setOpaque(false);
         player.setLayout(new GridBagLayout());
-        GridBagConstraints gcPlayer = new GridBagConstraints();
         gcPlayer.anchor = GridBagConstraints.CENTER;
         JLabel playerLbl = new JLabel("Player's Hand");
         playerLbl.setForeground(Color.WHITE);
@@ -135,8 +183,7 @@ public class OnePlayerPanel extends JPanel {
         player.add(playerLbl, gcPlayer);
         add(player, gc);
 
-        // events (not working as of now)
-        // put all variables as global
+        // events
         betBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -152,7 +199,8 @@ public class OnePlayerPanel extends JPanel {
                     gcPlayer.weighty = 1000;
                     gcPlayer.gridy = 1;
                     player.add(new DisplayCards(playerList, sprites, false), gcPlayer);
-                    
+                    revalidate();
+                    repaint();
                 }
             }
         });
