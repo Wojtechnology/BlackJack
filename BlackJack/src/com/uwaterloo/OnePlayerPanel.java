@@ -25,6 +25,9 @@ public class OnePlayerPanel extends JPanel {
     private Cards cards;
     private JPanel ref;
     private boolean dealt;
+    private boolean[] activeBtn;
+    private int turn = 0;
+    private JButton[] btns;
 
     private Image[][] sprites = new Image[4][13];
 
@@ -54,14 +57,15 @@ public class OnePlayerPanel extends JPanel {
         GridBagConstraints gcPlayer = new GridBagConstraints();
 
         JTextField betFld = new JTextField("Enter Bet Amount");
-        JButton betBtn = new JButton("Lock in Bet");
-        JButton hitBtn = new JButton("Hit");
-        JButton stdBtn = new JButton("Stand");
-        JButton ddwBtn = new JButton("Double Down");
-        JButton splBtn = new JButton("Split");
-        JButton surBtn = new JButton("Surrender");
-        JButton insBtn = new JButton("Insurance");
-        JButton extBtn = new JButton("Exit");
+        btns = new JButton[8];
+        btns[0] = new JButton("Lock in Bet");
+        btns[1] = new JButton("Hit");
+        btns[2] = new JButton("Stand");
+        btns[3] = new JButton("Double Down");
+        btns[4] = new JButton("Split");
+        btns[5] = new JButton("Surrender");
+        btns[6] = new JButton("Insurance");
+        btns[7] = new JButton("Exit");
         JLabel betLbl = new JLabel(" ");
         JPanel controls = new JPanel();
         JPanel dealer = new JPanel() {
@@ -95,6 +99,14 @@ public class OnePlayerPanel extends JPanel {
         // configuring panel for control of game
         Dimension bSize = new Dimension(150, 25);
 
+        activeBtn = new boolean[8];
+        
+        activeBtn[0] = true;
+        
+        for(int i = 1; i < activeBtn.length; i++){
+            activeBtn[i] = false;
+        }
+        
         controls.setLayout(new GridBagLayout());
         gcControls.weighty = 1;
         gcControls.weightx = 1;
@@ -107,49 +119,19 @@ public class OnePlayerPanel extends JPanel {
         controls.add(betFld, gcControls);
 
         gcControls.gridy = 1;
-        betBtn.setPreferredSize(bSize);
-        controls.add(betBtn, gcControls);
-
-        gcControls.gridy = 2;
         betLbl.setPreferredSize(bSize);
         controls.add(betLbl, gcControls);
-
-        gcControls.gridy = 3;
-        hitBtn.setPreferredSize(bSize);
-        hitBtn.setEnabled(false);
-        controls.add(hitBtn, gcControls);
-
-        gcControls.gridy = 4;
-        stdBtn.setPreferredSize(bSize);
-        stdBtn.setEnabled(false);
-        controls.add(stdBtn, gcControls);
-
-        gcControls.gridy = 5;
-        ddwBtn.setPreferredSize(bSize);
-        ddwBtn.setEnabled(false);
-        controls.add(ddwBtn, gcControls);
-
-        gcControls.gridy = 6;
-        splBtn.setPreferredSize(bSize);
-        splBtn.setEnabled(false);
-        controls.add(splBtn, gcControls);
-
-        gcControls.gridy = 7;
-        surBtn.setPreferredSize(bSize);
-        surBtn.setEnabled(false);
-        controls.add(surBtn, gcControls);
-
-        gcControls.gridy = 8;
-        insBtn.setPreferredSize(bSize);
-        insBtn.setEnabled(false);
-        controls.add(insBtn, gcControls);
-
-        gcControls.gridy = 9;
-        gcControls.weighty = 1000;
-        extBtn.setPreferredSize(bSize);
-        extBtn.setEnabled(false);
-        controls.add(extBtn, gcControls);
-
+        
+        for(int i = 0; i < btns.length; i++){
+            gcControls.gridy = i + 2;
+            if(i == btns.length - 1){
+                gcControls.weighty = 1000;
+            }
+            btns[i].setPreferredSize(bSize);
+            btns[i].setEnabled(activeBtn[i]);
+            controls.add(btns[i], gcControls);
+        }
+        
         add(controls, gc);
 
         // configuring dealer's box
@@ -184,7 +166,7 @@ public class OnePlayerPanel extends JPanel {
         add(player, gc);
 
         // events
-        betBtn.addActionListener(new ActionListener() {
+        btns[0].addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (!dealt) {
@@ -204,5 +186,15 @@ public class OnePlayerPanel extends JPanel {
                 }
             }
         });
+    }
+    private boolean[] getActiveBtn(){
+        boolean[] activeArray = new boolean[8];
+        for(int i = 0; i < activeArray.length; i++){
+            activeArray[i] = false;
+        }
+        if(turn == 0){
+            
+        }
+        return activeArray;
     }
 }

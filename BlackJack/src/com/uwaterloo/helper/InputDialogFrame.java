@@ -46,8 +46,7 @@ public class InputDialogFrame extends JDialog {
         JTextField newName = new JTextField("Enter Name Here");
         newName.setVisible(true);
         newName.setSize(300, 200);
-        
-            }
+    }
 }
 
 
