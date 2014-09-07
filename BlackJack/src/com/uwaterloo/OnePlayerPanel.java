@@ -25,9 +25,17 @@ public class OnePlayerPanel extends JPanel {
     private Cards cards;
     private JPanel ref;
     private boolean dealt;
-    private boolean[] activeBtn;
     private int turn = 0;
+    private JTextField betFld;
     private JButton[] btns;
+    private GridBagConstraints gc;
+    private GridBagConstraints gcControls;
+    private GridBagConstraints gcDealer;
+    private GridBagConstraints gcPlayer;
+    private JLabel betLbl;
+    private JPanel controls;
+    private JPanel dealer;
+    private JPanel player;
 
     private Image[][] sprites = new Image[4][13];
 
@@ -51,12 +59,12 @@ public class OnePlayerPanel extends JPanel {
         setOpaque(false);
         setLayout(new GridBagLayout());
 
-        GridBagConstraints gc = new GridBagConstraints();
-        GridBagConstraints gcControls = new GridBagConstraints();
-        GridBagConstraints gcDealer = new GridBagConstraints();
-        GridBagConstraints gcPlayer = new GridBagConstraints();
+        gc = new GridBagConstraints();
+        gcControls = new GridBagConstraints();
+        gcDealer = new GridBagConstraints();
+        gcPlayer = new GridBagConstraints();
 
-        JTextField betFld = new JTextField("Enter Bet Amount");
+        betFld = new JTextField("Enter Bet Amount");
         btns = new JButton[8];
         btns[0] = new JButton("Lock in Bet");
         btns[1] = new JButton("Hit");
@@ -66,9 +74,9 @@ public class OnePlayerPanel extends JPanel {
         btns[5] = new JButton("Surrender");
         btns[6] = new JButton("Insurance");
         btns[7] = new JButton("Exit");
-        JLabel betLbl = new JLabel(" ");
-        JPanel controls = new JPanel();
-        JPanel dealer = new JPanel() {
+        betLbl = new JLabel(" ");
+        controls = new JPanel();
+        dealer = new JPanel() {
             @Override
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
@@ -76,7 +84,7 @@ public class OnePlayerPanel extends JPanel {
                 g.fillRoundRect(0, 0, getWidth(), getHeight(), 20, 20);
             }
         };
-        JPanel player = new JPanel();
+        player = new JPanel();
 
         gc.anchor = GridBagConstraints.NORTH;
         gc.weightx = 1;
@@ -99,14 +107,6 @@ public class OnePlayerPanel extends JPanel {
         // configuring panel for control of game
         Dimension bSize = new Dimension(150, 25);
 
-        activeBtn = new boolean[8];
-        
-        activeBtn[0] = true;
-        
-        for(int i = 1; i < activeBtn.length; i++){
-            activeBtn[i] = false;
-        }
-        
         controls.setLayout(new GridBagLayout());
         gcControls.weighty = 1;
         gcControls.weightx = 1;
@@ -121,17 +121,21 @@ public class OnePlayerPanel extends JPanel {
         gcControls.gridy = 1;
         betLbl.setPreferredSize(bSize);
         controls.add(betLbl, gcControls);
-        
-        for(int i = 0; i < btns.length; i++){
+
+        for (int i = 0; i < btns.length; i++) {
             gcControls.gridy = i + 2;
-            if(i == btns.length - 1){
+            if (i == btns.length - 1) {
                 gcControls.weighty = 1000;
             }
             btns[i].setPreferredSize(bSize);
-            btns[i].setEnabled(activeBtn[i]);
+            if (i != 0) {
+                btns[i].setEnabled(false);
+            } else {
+                btns[i].setEnabled(true);
+            }
             controls.add(btns[i], gcControls);
         }
-        
+
         add(controls, gc);
 
         // configuring dealer's box
@@ -175,26 +179,27 @@ public class OnePlayerPanel extends JPanel {
                         dealerList.add(cards.getCurrent());
                         playerList.add(cards.getCurrent());
                     }
-                    gcDealer.gridy = 1;
-                    gcDealer.weighty = 1000;
-                    dealer.add(new DisplayCards(dealerList, sprites, true), gcDealer);
-                    gcPlayer.weighty = 1000;
-                    gcPlayer.gridy = 1;
-                    player.add(new DisplayCards(playerList, sprites, false), gcPlayer);
-                    revalidate();
-                    repaint();
                 }
+                displayCards();
             }
         });
     }
-    private boolean[] getActiveBtn(){
-        boolean[] activeArray = new boolean[8];
-        for(int i = 0; i < activeArray.length; i++){
-            activeArray[i] = false;
+
+    private void updateActiveBtn() {
+        for (int i = 0; i < btns.length; i++) {
+
         }
-        if(turn == 0){
-            
-        }
-        return activeArray;
+    }
+
+    private void displayCards() {
+        gcDealer.gridy = 1;
+        gcDealer.weighty = 1000;
+        dealer.add(new DisplayCards(dealerList, sprites, true), gcDealer);
+        gcPlayer.weighty = 1000;
+        gcPlayer.gridy = 1;
+        player.add(new DisplayCards(playerList, sprites, false), gcPlayer);
+        revalidate();
+        repaint();
+
     }
 }
